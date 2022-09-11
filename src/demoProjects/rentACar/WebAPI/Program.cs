@@ -24,7 +24,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-if (app.Environment.IsProduction())//hata kontrol
+//if (app.Environment.IsProduction())//hata kontrol
     app.ConfigureCustomExceptionMiddleware();
 
 app.UseAuthorization();

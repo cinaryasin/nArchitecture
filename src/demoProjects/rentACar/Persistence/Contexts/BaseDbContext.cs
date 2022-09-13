@@ -13,7 +13,8 @@ namespace Persistence.Contexts
     {
         protected IConfiguration Configuration { get; set; }
         public DbSet<Brand> Brands { get; set; }
-       
+        public DbSet<Model> Models { get; set; }
+
 
         public BaseDbContext(DbContextOptions dbContextOptions, IConfiguration configuration) : base(dbContextOptions)
         {
@@ -34,6 +35,20 @@ namespace Persistence.Contexts
                 a.ToTable("Brands").HasKey(k => k.Id);
                 a.Property(p => p.Id).HasColumnName("Id");
                 a.Property(p => p.Name).HasColumnName("Name");
+                
+                a.HasMany(p=> p.Models);
+            });
+            modelBuilder.Entity<Model>(a =>
+            {
+                a.ToTable("Models").HasKey(k => k.Id);
+                a.Property(p => p.Id).HasColumnName("Id");
+                a.Property(p => p.BrandId).HasColumnName("BrandId");
+                a.Property(p => p.Name).HasColumnName("Name");
+                a.Property(p => p.DailyPrice).HasColumnName("DailyPrice");
+                a.Property(p => p.ImageUrl).HasColumnName("ImageUrl");
+
+                a.HasOne(p => p.Brand);
+
             });
 
 
@@ -41,7 +56,10 @@ namespace Persistence.Contexts
             Brand[] brandEntitySeads = { new(1, "BMW"), new(2, "Mercedes") };
             modelBuilder.Entity<Brand>().HasData(brandEntitySeads);
 
-           
+            Model[] modelEntitySeads = { new(1,"Series 520",1200,"",1), new(3, "Series 740", 2000, "", 1), new(2, "A 180",1500,"",2) };
+            modelBuilder.Entity<Model>().HasData(modelEntitySeads);
+
+
         }
     }
 }

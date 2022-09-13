@@ -14,6 +14,9 @@
 
   <ItemGroup>
     <Folder Include="Features\Brands\Constants\" />
+    <Folder Include="Features\Models\Commends\" />
+    <Folder Include="Features\Models\Constans\" />
+    <Folder Include="Features\Models\Rules\" />
   </ItemGroup>
 
 	<ItemGroup>
